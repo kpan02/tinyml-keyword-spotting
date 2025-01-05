@@ -1,0 +1,8 @@
+src/__pycache__/
+tests/__pycache__/
+.ipynb_checkpoints
+runs/
+models/
+onnx-tensorflow/
+dataset/
+.*/
