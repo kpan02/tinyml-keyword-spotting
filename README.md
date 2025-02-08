@@ -4,8 +4,8 @@
 
 `"We cannot solve our problems with the same thinking we used when we created them.” -- Albert Einstein`
 
-Assigned Date: Monday February 19th    
-**Due Date: Wednesday March 13th**
+Assigned Date: Monday February 24th    
+**Due Date: Wednesday March 12th**
 
 Total marks = 16/100    
 (-2 marks per day late)
@@ -13,7 +13,7 @@ Total marks = 16/100
 ----
 
 <p align="center">
-  <img src="https://cdn.shopify.com/s/files/1/0506/1689/3647/products/AKX00028_02.unbox_934x700.jpg?v=1615314707"  width="50%" height="50%" class="center" />
+  <img src="https://store.arduino.cc/cdn/shop/files/AKX00028_02.unbox_d5387fcf-26c7-4981-b1fd-6d3abb552d50_1000x750.jpg?v=1727099482"  width="50%" height="50%" class="center" />
 </p>
 
 ## Overview:
