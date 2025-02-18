@@ -13,7 +13,7 @@ Connect your board. Then compile and upload the code to your board by clicking t
 <p align="left">
   <img src= "./images/left_arrow.png" height="100" class="left" />
 </p>
-Try saying yes, no, and any other words to see if the program correctly identifies the words you are saying as “yes”, “no”, “unknown”, or “silence”. 
+Try saying yes, no, and any other words to see if the program correctly identifies the words you are saying as “yes”, “no”, “unknown”, or “silence”. Note: Compling and uploading takes some major time, so please be patient. 
 
 #### Step 3
 After the code is successfully uploaded to your board, open the Serial Monitor by clicking the icon on the top right. You may need to reconnect your port.
