@@ -1,5 +1,7 @@
 # Deploy your model to Nano 33 BLE board
 
+Since `Arduino_TensorFlowLite` lib is removed in the latest version of Arduino IDE, you need to install this lib by following [these instructions](https://github.com/tensorflow/tflite-micro-arduino-examples?tab=readme-ov-file#github). Otherwise, you will not see `Arduino_TensorFlowLite` under `File/Examples` path in Step 1.
+
 #### Step 1
 Open the micro_speech sketch under Examples -> Arduino_TensorFlowLite -> micro_speech. 
 <p align="left">
@@ -11,7 +13,7 @@ Connect your board. Then compile and upload the code to your board by clicking t
 <p align="left">
   <img src= "./images/left_arrow.png" height="100" class="left" />
 </p>
-Try saying yes, no, and any other words to see if the program correctly identifies the words you are saying as “yes”, “no”, “unknown”, or “silence”. 
+Try saying yes, no, and any other words to see if the program correctly identifies the words you are saying as “yes”, “no”, “unknown”, or “silence”. Note: Compling and uploading takes some time, so please be patient. 
 
 #### Step 3
 After the code is successfully uploaded to your board, open the Serial Monitor by clicking the icon on the top right. You may need to reconnect your port.
