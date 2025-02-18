@@ -1,5 +1,7 @@
 # Deploy your model to Nano 33 BLE board
 
+Since `Arduino_TensorFlowLite` lib is removed in the latest version of Arduino IDE, you need to install this lib by following [this instruction](https://github.com/tensorflow/tflite-micro-arduino-examples?tab=readme-ov-file#github). Otherwise, you will not see `Arduino_TensorFlowLite` under `File/Examples` path in Step 1.
+
 #### Step 1
 Open the micro_speech sketch under Examples -> Arduino_TensorFlowLite -> micro_speech. 
 <p align="left">
