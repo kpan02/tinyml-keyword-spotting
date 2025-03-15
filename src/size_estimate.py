@@ -97,32 +97,15 @@ def compute_forward_memory(model, input_shape, device):
     """
     
     # TODO: fill-in (start)
-    # Dictionary to store memory usage for each layer
-    memory_usage = {}
+    tensor_sizes = {}
     
     def hook_fn(module, input, output):
-        # Calculate memory for input tensors (excluding parameters)
-        input_memory = 0
-        for inp in input:
-            if isinstance(inp, torch.Tensor):
-                # Each float32 value takes 4 bytes
-                input_memory += inp.numel() * 4
-        
-        # Calculate memory for output tensors
-        output_memory = 0
         if isinstance(output, torch.Tensor):
-            output_memory = output.numel() * 4
+            tensor_sizes[output.data_ptr()] = output.numel() * 4
         elif isinstance(output, tuple):
             for out in output:
                 if isinstance(out, torch.Tensor):
-                    output_memory += out.numel() * 4
-        
-        # Store the memory usage for this module
-        memory_usage[module] = {
-            'input_memory': input_memory,
-            'output_memory': output_memory,
-            'total': input_memory + output_memory
-        }
+                    tensor_sizes[out.data_ptr()] = out.numel() * 4
     
     hooks = []
     for module in model.modules():
@@ -135,12 +118,10 @@ def compute_forward_memory(model, input_shape, device):
     for hook in hooks:
         hook.remove()
     
-    total_memory = 0
-    for module_memory in memory_usage.values():
-        total_memory += module_memory['total']
+    total_memory = input_tensor.numel() * 4
     
-    input_tensor_memory = input_tensor.numel() * 4
-    total_memory += input_tensor_memory
+    for size in tensor_sizes.values():
+        total_memory += size
     
     return total_memory
     # TODO: fill-in (end)

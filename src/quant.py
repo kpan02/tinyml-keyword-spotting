@@ -18,7 +18,7 @@ class ste_round(torch.autograd.Function):
     @staticmethod
     def backward(ctx, grad_output):
         # TODO: fill-in (start)
-        return grad_output
+        return grad_output.clone()
         # TODO: fill-in (end)
 
 
@@ -139,9 +139,9 @@ class SymmetricQuantFunction(torch.autograd.Function):
 
         # TODO: fill-in (start)
         n = 2 ** (k - 1) - 1
-        x_int = linear_quantize(x, scale, zero_point)
-        x_quant = torch.clamp(x_int, -n, n)
-        output = (x_quant - zero_point) * scale
+        x_int = torch.round(x / scale)
+        x_quant = torch.clamp(x_int, -n - 1, n)
+        output = x_quant
         # TODO: fill-in (end)
         return output
 
@@ -182,9 +182,9 @@ class AsymmetricQuantFunction(torch.autograd.Function):
 
         # TODO: fill-in (start)
         n = 2 ** k - 1
-        x_int = linear_quantize(x, scale, zero_point)
+        x_int = torch.round(x / scale) + zero_point
         x_quant = torch.clamp(x_int, 0, n)
-        output = (x_quant - zero_point) * scale
+        output = x_quant
         # TODO: fill-in (end)
         return output
 
@@ -229,15 +229,20 @@ class QConfig(object):
                 # TODO: fill-in (start)
                 max_abs = max(abs(saturation_min), abs(saturation_max))
                 n = 2 ** (self.quant_bits - 1) - 1    
-                scale = max_abs / n if max_abs > 0 else torch.tensor(1.0) 
-                zero_point = 0
+                scale = torch.tensor(max_abs / n if max_abs > 0 else 1.0)
+                zero_point = torch.tensor(0)
                 # TODO: fill-in (end)
             else:
                 # TODO: fill-in (start)
                 n = 2 ** self.quant_bits - 1
-                saturation_min = max(0, saturation_min)
-                scale = (saturation_max - saturation_min) / n if saturation_max > saturation_min else torch.tensor(1.0)
-                zero_point = torch.round(-saturation_min / scale) if scale > 0 else 0
+                if saturation_min < 0:
+                    scale = torch.tensor((saturation_max - saturation_min) / n)
+                    zero_point_float = -saturation_min / scale.item()
+                    zero_point = torch.tensor(int(zero_point_float + 0.5))
+                else:
+                    saturation_min = max(0, saturation_min)
+                    scale = torch.tensor((saturation_max - saturation_min) / n if saturation_max > saturation_min else 1.0)
+                    zero_point = torch.tensor(int((-saturation_min / scale).item()) if scale.item() > 0 else 0)
                 # TODO: fill-in (end)
         return scale, zero_point
 
@@ -361,7 +366,10 @@ def conv2d_linear_quantized(
     # If bias exists, quantize and add it
     if module.bias is not None:
         b_q = quantize_weights_bias(module.bias, b_qconfig, fake_quantize=True)
-        y = y + b_q.reshape(1, -1, 1, 1) if len(y.shape) == 4 else y + b_q
+        if len(y.shape) == 4:
+            y = y + b_q.reshape(1, -1, 1, 1)
+        else:
+            y = y + b_q
     # TODO: fill-in (end)
 
     return y
