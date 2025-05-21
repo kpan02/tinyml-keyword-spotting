@@ -2,6 +2,8 @@ This project implements a complete audio keyword spotting system for microcontro
 
 The workflow includes audio preprocessing, model training, memory and compute profiling, and deployment to the Arduino Nano 33 BLE. Advanced techniques like quantization-aware training and structured/unstructured pruning are explored to improve efficiency while maintaining accuracy. Final models are benchmarked across desktop CPUs, GPUs, and the embedded MCU to evaluate performance trade-offs in real-world deployment scenarios.
 
+---
+
 ### ECE 5545 Machine Learning Hardware and Systems
 
 # Assignment 2: Keyword Spotting with MicroControllers
@@ -14,7 +16,6 @@ Assigned Date: Monday February 24th
 Total marks = 16/100    
 (-2 marks per day late)
 
-----
 
 <p align="center">
   <img src="https://store.arduino.cc/cdn/shop/files/AKX00028_02.unbox_d5387fcf-26c7-4981-b1fd-6d3abb552d50_1000x750.jpg?v=1727099482"  width="50%" height="50%" class="center" />
