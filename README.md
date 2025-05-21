@@ -1,4 +1,4 @@
-This project implements a complete audio keyword spotting system for microcontrollers, developed as part of the [**ECE 5545**](https://abdelfattah-class.github.io/ece5545/): _Machine Learning Hardware and Systems_ course at Cornell Tech. 
+**Overview**: This project implements a complete audio keyword spotting system for microcontrollers, developed as part of the [**ECE 5545**](https://abdelfattah-class.github.io/ece5545/): _Machine Learning Hardware and Systems_ course at Cornell Tech. 
 
 The workflow includes audio preprocessing, model training, memory and compute profiling, and deployment to the Arduino Nano 33 BLE. Advanced techniques like quantization-aware training and structured/unstructured pruning are explored to improve efficiency while maintaining accuracy. Final models are benchmarked across desktop CPUs, GPUs, and the embedded MCU to evaluate performance trade-offs in real-world deployment scenarios.
 
